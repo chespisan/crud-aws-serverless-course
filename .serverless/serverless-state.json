@@ -239,7 +239,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/crud-serverless-users/dev/1698179917229-2023-10-24T20:38:37.229Z/nodejs.zip"
+                "S3Key": "serverless/crud-serverless-users/dev/1698181617229-2023-10-24T21:06:57.229Z/nodejs.zip"
               },
               "LayerName": "prd-dependencies",
               "CompatibleRuntimes": [
@@ -254,7 +254,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/crud-serverless-users/dev/1698179917229-2023-10-24T20:38:37.229Z/get-all-users.zip"
+                "S3Key": "serverless/crud-serverless-users/dev/1698181617229-2023-10-24T21:06:57.229Z/get-all-users.zip"
               },
               "Handler": "getAllUsers/handler.getAllUsers",
               "Runtime": "nodejs14.x",
@@ -284,7 +284,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/crud-serverless-users/dev/1698179917229-2023-10-24T20:38:37.229Z/get-users.zip"
+                "S3Key": "serverless/crud-serverless-users/dev/1698181617229-2023-10-24T21:06:57.229Z/get-users.zip"
               },
               "Handler": "getUsers/handler.getUsers",
               "Runtime": "nodejs14.x",
@@ -314,7 +314,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/crud-serverless-users/dev/1698179917229-2023-10-24T20:38:37.229Z/create-users.zip"
+                "S3Key": "serverless/crud-serverless-users/dev/1698181617229-2023-10-24T21:06:57.229Z/create-users.zip"
               },
               "Handler": "createUsers/handler.createUsers",
               "Runtime": "nodejs14.x",
@@ -344,7 +344,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/crud-serverless-users/dev/1698179917229-2023-10-24T20:38:37.229Z/update-users.zip"
+                "S3Key": "serverless/crud-serverless-users/dev/1698181617229-2023-10-24T21:06:57.229Z/update-users.zip"
               },
               "Handler": "updateUsers/handler.updateUsers",
               "Runtime": "nodejs14.x",
@@ -374,7 +374,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/crud-serverless-users/dev/1698179917229-2023-10-24T20:38:37.229Z/delete-users.zip"
+                "S3Key": "serverless/crud-serverless-users/dev/1698181617229-2023-10-24T21:06:57.229Z/delete-users.zip"
               },
               "Handler": "deleteUsers/handler.deleteUsers",
               "Runtime": "nodejs14.x",
@@ -404,7 +404,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/crud-serverless-users/dev/1698179917229-2023-10-24T20:38:37.229Z/signedURL.zip"
+                "S3Key": "serverless/crud-serverless-users/dev/1698181617229-2023-10-24T21:06:57.229Z/signedURL.zip"
               },
               "Handler": "signedurl/handler.signedS3URL",
               "Runtime": "nodejs14.x",
@@ -434,7 +434,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/crud-serverless-users/dev/1698179917229-2023-10-24T20:38:37.229Z/thumbGenerator.zip"
+                "S3Key": "serverless/crud-serverless-users/dev/1698181617229-2023-10-24T21:06:57.229Z/thumbGenerator.zip"
               },
               "Handler": "thumbnail/handler.thumbnailGenerator",
               "Runtime": "nodejs14.x",
@@ -502,16 +502,6 @@
               "CodeSha256": "MrD9ijbfQ4qi7TMfBDypOIYqTy2Uc9RxigvWp1qPCKA="
             }
           },
-          "SignedURLLambdaVersionjoqg9u1BqlkDIHn8eag0OWyazxPUFD8bRbJWbimhc": {
-            "Type": "AWS::Lambda::Version",
-            "DeletionPolicy": "Retain",
-            "Properties": {
-              "FunctionName": {
-                "Ref": "SignedURLLambdaFunction"
-              },
-              "CodeSha256": "hR4kiEjp269a68HxFLP/TFnjX5bZFZqILggD08nAZKk="
-            }
-          },
           "UpdateDashusersLambdaVersioncSp8TS8FxDS1krIyBl6ygaQZ82isRkqIgwnur4Ng": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
@@ -520,6 +510,16 @@
                 "Ref": "UpdateDashusersLambdaFunction"
               },
               "CodeSha256": "d8cI3OMm2USQqZaB7kb9WFFAIruCAsrqMEl5gN0HgoQ="
+            }
+          },
+          "SignedURLLambdaVersionjoqg9u1BqlkDIHn8eag0OWyazxPUFD8bRbJWbimhc": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "SignedURLLambdaFunction"
+              },
+              "CodeSha256": "hR4kiEjp269a68HxFLP/TFnjX5bZFZqILggD08nAZKk="
             }
           },
           "ThumbGeneratorLambdaVersionHq3v7vRJ7WNcL30QEUCllPCN6q5zcXdVkBx3kgzNeA": {
@@ -656,7 +656,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/crud-serverless-users/dev/1698179917229-2023-10-24T20:38:37.229Z/custom-resources.zip"
+                "S3Key": "serverless/crud-serverless-users/dev/1698181617229-2023-10-24T21:06:57.229Z/custom-resources.zip"
               },
               "FunctionName": "crud-serverless-users-dev-custom-resource-existing-s3",
               "Handler": "s3/handler.handler",
@@ -1106,7 +1106,7 @@
               }
             }
           },
-          "ApiGatewayDeployment1698179916171": {
+          "ApiGatewayDeployment1698181616343": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -1440,7 +1440,7 @@
           },
           "BaseLambdaLayerS3Key": {
             "Description": "Current Lambda layer S3Key",
-            "Value": "serverless/crud-serverless-users/dev/1698179917229-2023-10-24T20:38:37.229Z/nodejs.zip",
+            "Value": "serverless/crud-serverless-users/dev/1698181617229-2023-10-24T21:06:57.229Z/nodejs.zip",
             "Export": {
               "Name": "sls-crud-serverless-users-dev-BaseLambdaLayerS3Key"
             }
@@ -1481,15 +1481,6 @@
               "Name": "sls-crud-serverless-users-dev-DeleteDashusersLambdaFunctionQualifiedArn"
             }
           },
-          "SignedURLLambdaFunctionQualifiedArn": {
-            "Description": "Current Lambda function version",
-            "Value": {
-              "Ref": "SignedURLLambdaVersionjoqg9u1BqlkDIHn8eag0OWyazxPUFD8bRbJWbimhc"
-            },
-            "Export": {
-              "Name": "sls-crud-serverless-users-dev-SignedURLLambdaFunctionQualifiedArn"
-            }
-          },
           "UpdateDashusersLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
@@ -1497,6 +1488,15 @@
             },
             "Export": {
               "Name": "sls-crud-serverless-users-dev-UpdateDashusersLambdaFunctionQualifiedArn"
+            }
+          },
+          "SignedURLLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "SignedURLLambdaVersionjoqg9u1BqlkDIHn8eag0OWyazxPUFD8bRbJWbimhc"
+            },
+            "Export": {
+              "Name": "sls-crud-serverless-users-dev-SignedURLLambdaFunctionQualifiedArn"
             }
           },
           "ThumbGeneratorLambdaFunctionQualifiedArn": {
@@ -1931,7 +1931,7 @@
           "!*.zip"
         ],
         "artifactsS3KeyDirname": "serverless/crud-serverless-users/dev/code-artifacts",
-        "artifactDirectoryName": "serverless/crud-serverless-users/dev/1698179917229-2023-10-24T20:38:37.229Z"
+        "artifactDirectoryName": "serverless/crud-serverless-users/dev/1698181617229-2023-10-24T21:06:57.229Z"
       },
       "custom": {
         "$ref": "$[\"service\"][\"custom\"]"
@@ -1961,7 +1961,7 @@
   },
   "package": {
     "individually": true,
-    "artifactDirectoryName": "serverless/crud-serverless-users/dev/1698179917229-2023-10-24T20:38:37.229Z",
+    "artifactDirectoryName": "serverless/crud-serverless-users/dev/1698181617229-2023-10-24T21:06:57.229Z",
     "artifact": ""
   }
 }
