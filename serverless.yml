@@ -6,19 +6,27 @@ provider:
   iam:
     role:
       statements:
-      - Effect: Allow
-        Action: 'dynamodb:*'
-        Resource: arn:aws:dynamodb:us-east-1:751824056806:table/usersTable
+      # Permisos para role 
+        - Effect: Allow
+          Action: 'dynamodb:*'
+          Resource: arn:aws:dynamodb:us-east-1:751824056806:table/usersTable
+        - Effect: Allow
+          Action: 's3:*'
+          Resource: arn:aws:s3:::bucket-serverles-course-23349/*
+  environment:
+    BUCKET: bucket-serverles-course-23349
 
-plugins:
-  - serverless-offline
-  - serverless-dynamodb
+# plugins:
+#   - serverless-offline
+#   - serverless-dynamodb
 
 package:
   individually: true
   patterns:
-   - "!*/**"
-	
+    - "!*/**"
+    - "!nodejs*"
+    - "!*.zip"
+   
 custom:
   dynamodb:
   # If you only want to use DynamoDB Local in some stages, declare them here
@@ -49,6 +57,11 @@ functions:
       - http:
           path: users/{id}
           method: GET
+          # request, aqui le indicaremos una cierta de valdiaciones que correran cn el api gateway
+          request: 
+            parameters:
+              paths:
+                id: true
   create-users:
     handler: createUsers/handler.createUsers
     package:
@@ -58,6 +71,10 @@ functions:
       - http:
           path: users
           method: POST
+          #  Aqui aplicaremos otra validacion que el body haga match cn el schema
+          request:
+            schemas:
+              application/json: ${file(schemas/user-schema.json)}
   update-users:
     handler: updateUsers/handler.updateUsers
     package:
@@ -67,6 +84,12 @@ functions:
       - http:
           path: users/{id}
           method: PATCH
+          request: 
+            parameters:
+              paths:
+                id: true
+            schemas:
+              application/json: ${file(schemas/user-schema.json)}
   delete-users:
     handler: deleteUsers/handler.deleteUsers
     package:
@@ -75,10 +98,54 @@ functions:
     events:
       - http:
           path: users/{id}
-          method: DELETE        
+          method: DELETE   
+          request: 
+            parameters:
+              paths:
+                id: true
+  signedURL:
+    handler: signedurl/handler.signedS3URL
+    package:
+      patterns:
+        - "signedurl/handler.js"
+    events:
+      - http:
+          path: signedurl
+          method: GET
+          request: 
+            parameters:
+              querystrings:
+                filename: true
+  thumbGenerator:
+    handler: thumbnail/handler.thumbnailGenerator
+    layers:
+      - { Ref: BaseLambdaLayer }
+    package:
+      patterns:
+        - "thumbnail/handler.js"
+        - "node_modules/**"
+    events:
+    #  Evento que se ejecutara no por apigateway si no cuando se crea cualquier objeto en el bucket
+      - s3:
+          bucket: bucket-serverles-course-23349
+          event: s3:ObjectCreated:*
+          # que tome el bucket creado, existente
+          existing: true
+          # le indicamos una regla y es que especifique exactamente cuando se cree en la carpeta de uploads
+          rules:
+            - prefix: uploads/
+
+layers:
+  base:
+    name: "prd-dependencies"
+    compatibleRuntimes:
+      - "nodejs14.x"
+    package:
+      artifact: app/nodejs.zip
 
 resources:
   Resources:
+  # Recurso/config para crear una tabla de dynamodb 
     usersTable:
       Type: AWS::DynamoDB::Table
       Properties:
@@ -92,3 +159,29 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
+    # Recurso/config para crear un bucket publico en s3
+    S3Bucket:
+      Type: 'AWS::S3::Bucket'
+      Properties:
+        # AccessControl: PublicRead
+        OwnershipControls:
+          Rules:
+          - ObjectOwnership: ObjectWriter
+        BucketName: bucket-serverles-course-23349
+    # Recurso/Config para crear una politica de privacidad para un bucket en especial 
+    SampleBucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket: !Ref S3Bucket
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Action:
+                - 's3:GetObject'
+              Effect: Allow
+              Resource: !Join
+                - ''
+                - - 'arn:aws:s3:::'
+                  - !Ref S3Bucket
+                  - /*
+              Principal: '*'
