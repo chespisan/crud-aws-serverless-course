@@ -22,6 +22,7 @@ jobs:
   build-js-layer-deps:
     timeout-minutes: 15
     runs-on: ubuntu-latest
+    name: Build SLS Layer - Prod
     container:
       image: "node:14-buster"
     steps:
@@ -38,7 +39,6 @@ jobs:
         with:
           name: nodejsdeps
           path: nodejs.zip
-  
 
   deploy-env:
     name: Deploy Lambda
@@ -70,10 +70,10 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
 
     - name: Comment PR
-    
       uses: thollander/actions-comment-pull-request@v1
       with:
         message: |
           Your SLS App was deployed!
           Awesome :D
+
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
