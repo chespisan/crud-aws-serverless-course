@@ -3,6 +3,10 @@ service: crud-serverless-users
 provider:
   name: aws
   runtime: nodejs14.x
+  # Utilizaremos la property apiGateway para poder generar un api key y proteger nuestras lambas etc
+  apiGateway:
+    apiKeys:
+      - crud-serverless-users-apikey
   iam:
     role:
       statements:
@@ -55,6 +59,8 @@ functions:
         - "getUsers/handler.js"
     events:
       - http:
+          # private nos ayuda a tener un tipo de validacion frente a algo 
+          private: true
           path: users/{id}
           method: GET
           # request, aqui le indicaremos una cierta de valdiaciones que correran cn el api gateway
